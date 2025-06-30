@@ -1,0 +1,59 @@
+<section>
+  <div class="page-width">
+    <div class="custom-recommendation-heading"><h2>Recommendation Products</h2></div>
+    <div id="glowally-recommendations" class="glowally-container">
+      <!-- Recommendations will be loaded here -->
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const recommendationsContainer = document.getElementById('glowally-recommendations');
+  
+  if (!recommendationsContainer) return;
+
+  fetch('/apps/recommendation')
+   .then(response => {
+    if (!response.ok) {
+      // Enhanced error logging
+      console.error('Failed with status:', response.status);
+      throw new Error(`Network response was not ok (${response.status})`);
+    }
+    return response.json();
+    })
+    .then(data => {
+      if (data.routine && data.routine.length) {
+        let html = '<ul>';
+        
+       data.routine.forEach(item => {
+  html += `
+    <li class="recommendation-item">
+      <div class="recommendation-product-img">
+        <img src="${item.image_url || 'placeholder-image.jpg'}" alt="${item.product}" />
+      </div>
+      <div class="recommendation-product-info">
+        <h4>${item.product}</h4>
+        <p class="reason">${item.reason}</p>
+      </div>
+    </li>
+  `;
+});
+        
+        html += '</ul>';
+        recommendationsContainer.innerHTML = html;
+      } else {
+        recommendationsContainer.innerHTML = '<p>No recommendations available at this time.</p>';
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching recommendations:', error);
+      recommendationsContainer.innerHTML = '<p>Unable to load recommendations. Please try again later.</p>';
+    });
+});
+</script>
+{% schema %}
+{
+  "name": "Custom Recommendation",
+  "settings": []
+}
+{% endschema %}

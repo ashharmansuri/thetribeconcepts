@@ -1,0 +1,224 @@
+{{ 'custom-main-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lazy-sections.js' | asset_url }}" defer></script>
+
+{% style %}
+    .section-{{ section.id }}-padding{
+         padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+       }
+
+
+   @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<section class="section-{{ section.id }}-padding custom-single-product-section">
+  <div class="page-width">
+    <div class="custom-single-product-wrapper">
+      <div class="product-main-image">
+        <div class="single-product-main-image-wrapper">
+          <img
+            class="single-product-main-image"
+            src="{{ product.featured_image | image_url: width: 500}}"
+            width=""
+            height=""
+          >
+          <button class="arrow arrow-left" aria-label="Previous image">
+            <img src="https://cdn.shopify.com/s/files/1/0705/0592/2697/files/left.png?v=1749529139" width="" height="">
+          </button>
+          <button class="arrow arrow-right" aria-label="Next image">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0705/0592/2697/files/right-arrow.png?v=1749529139"
+              width=""
+              height=""
+            >
+          </button>
+        </div>
+        <div class="product-thumbnails-container">
+          <div class="product-thumbnails">
+            {% for image in product.media limit: 6 %}
+              <img
+                class="single-product-thumbnail {% if forloop.first %}active-thumbnail{% endif %}"
+                src="{{ image | image_url: width: 500}}"
+                width=""
+                height=""
+                alt="Thumbnail {{ forloop.index }}"
+                data-index="{{ forloop.index0 }}"
+              >
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="single-product-info">
+        <img
+          class="single-product-badge-image"
+          src="{{ section.settings.image_badge | image_url: width: 300}}"
+          width=""
+          height=""
+        >
+        <h3 class="single-product-title">{{ product.title }}</h3>
+        <div class="single-product-price-box">
+          <span class="product-price-main">{{ product.price | money_with_currency }}</span>
+          {% if product.compare_at_price %}
+            <span class="product-price-compare">{{ product.compare_at_price | money_with_currency }}</span>
+          {% endif %}
+        </div>
+        <p class="single-product-tax-text">Inclusive all tax</p>
+
+        {% if product.metafields.custom.video_demo_url != blank %}
+          <div class="single-product-demo-video">
+            <div class="single-product-video-text">
+              <h5>{{ section.settings['video-caption'] }}</h5>
+              <h6>{{ section.settings['video-title'] }}</h6>
+            </div>
+            <button
+              class="video-modal-trigger"
+              data-video-url="{{ product.metafields.custom.video_demo_url | escape }}"
+            >
+              <span class="video-btn-icon">
+                <svg
+                  version="1.1"
+                  id="Controls"
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0"
+                  y="0"
+                  viewBox="0 0 128 128"
+                  style="enable-background:new 0 0 128 128"
+                  xml:space="preserve"
+                >
+                  <style>.st0{display:none;fill:#1e1e1e}</style><g id="row1"><path id="_x31_" style="fill:#1e1e1e" d="M0 127V1l128 63z"/></g>
+                </svg>
+              </span>
+              <span class="video-btn-text">Watch Demo</span>
+            </button>
+          </div>
+        {% endif %}
+        <div class="single-product-desc">{{ product.description }}</div>
+        <div class="single-product-button-wrapper">
+          <input type="hidden" value="{{ product.variants.first.id }}">
+          <button id="add-to-cart-{{ product.id }}">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="video-modal" id="video-modal-id">
+  <div class="video-modal__content">
+    <iframe
+      src="{{ product.metafields.custom.video_demo_url | escape }}"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+    <button class="video-modal__close">&times;</button>
+  </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const mainImage = document.querySelector(".single-product-main-image");
+    const thumbnails = document.querySelectorAll(".single-product-thumbnail");
+    const leftArrow = document.querySelector(".arrow-left");
+    const rightArrow = document.querySelector(".arrow-right");
+
+    // Get all product images from thumbnails data attributes
+    const productImages = Array.from(thumbnails).map((thumb) => {
+      return thumb.src.replace("_500x", "_500x");
+    });
+
+    let currentIndex = 0;
+
+    // Update main image and active thumbnail
+    function updateDisplay(index) {
+      currentIndex = index;
+      mainImage.src = productImages[index];
+
+      // Update active thumbnail
+      thumbnails.forEach((thumb, i) => {
+        if (i === index) {
+          thumb.classList.add("active-thumbnail");
+        } else {
+          thumb.classList.remove("active-thumbnail");
+        }
+      });
+
+      // Update arrow states
+      leftArrow.disabled = index === 0;
+      rightArrow.disabled = index === thumbnails.length - 1;
+    }
+
+    // Thumbnail click event
+    thumbnails.forEach((thumb) => {
+      thumb.addEventListener("click", function () {
+        const index = parseInt(this.getAttribute("data-index"));
+        updateDisplay(index);
+      });
+    });
+
+    // Arrow click events
+    leftArrow.addEventListener("click", function () {
+      if (currentIndex > 0) {
+        updateDisplay(currentIndex - 1);
+      }
+    });
+
+    rightArrow.addEventListener("click", function () {
+      if (currentIndex < thumbnails.length - 1) {
+        updateDisplay(currentIndex + 1);
+      }
+    });
+
+    // Initialize
+    updateDisplay(0);
+
+
+
+  });
+</script>
+{% schema %}
+{
+  "name": "Custom main Product",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_badge",
+      "label": "Badge Image"
+    },
+    {
+  "type": "text",
+  "id": "video-caption",
+  "label": "Video Caption",
+},
+    {
+  "type": "text",
+  "id": "video-title",
+  "label": "Video Title",
+},
+     {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 60
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,123 @@
+{% style %}
+    .section-{{ section.id }}-padding{
+         padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+       }
+  .section-{{ section.id }}-bg{
+    background-color:{{section.settings.body_color}}
+  }
+
+
+   @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+{% if product.metafields.custom.usp_1 == true %}
+  <section
+    class="section-{{ section.id }}-padding section-{{ section.id }}-bg lazy-section usp-section"
+    data-section="usp"
+  >
+    <div class="page-width">
+      <div class="usp-section-heading">
+        <h2>{{ section.settings.heading }}</h2>
+        <div class="usp-section-description">
+          {{ section.settings.paragraph }}
+        </div>
+      </div>
+      <div class="usp-section-wrapper">
+        {% for block in section.blocks %}
+          <div class="usp-section-block-item">
+            <div class="usp-section-item">
+              <div class="ups-section-icon-box">
+                {{ block.settings.svg_embed }}
+              </div>
+              <div class="ups-section-content-box">
+                <h3>{{ block.settings.item_title }}</h3>
+                <div class="ups-section-item-desc">{{ block.settings.item_paragraph }}</div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Usp Section",
+  "settings": [
+    {
+  "type": "color",
+  "id": "body_color",
+  "label": "Background Color",
+  "default": "#fcf2ef"
+},
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Main Heading",
+      "label": "Main Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph",
+      "label": "Paragraph"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 60
+    }
+  ],
+  "blocks":[
+    {
+      "type":"Usp-block-items",
+      "name":"Usp Block Items",
+      "settings":[
+        {
+        "type": "html",
+        "id": "svg_embed",
+        "label": "svg embed"
+      },
+        {
+        "type": "text",
+        "id": "item_title",
+        "label": "Item Text",
+        "default": "Usp Text"
+      },
+      {
+      "type": "richtext",
+      "id": "item_paragraph",
+      "label": "Item Paragraph"
+    }
+
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Usp Section"
+    }
+  ]
+}
+{% endschema %}

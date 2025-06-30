@@ -1,0 +1,207 @@
+{% style %}
+      .section-{{ section.id }}-padding{
+               padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+          padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+             }
+    .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-responsive table {
+    width: 100%;
+    min-width: 600px; /* or adjust to your table's minimal width */
+  }
+
+      h2.table-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+            padding: 20px 0;
+      border-bottom: 1px solid #ffe4e6;
+    }
+        .scientific-data-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 1.4rem 0;
+        }
+
+        .scientific-data-table--minimal th,
+        .scientific-data-table--minimal td {
+          padding: 1rem 1.5rem;
+          text-align: left;
+        }
+
+        .scientific-data-table--bordered th,
+        .scientific-data-table--bordered td {
+          border: 1px solid #ddd;
+         padding: 1rem 1.5rem;
+          text-align: left;
+        }
+
+        .scientific-data-table--striped tr:nth-child(even) {
+          background-color: #f9f9f9;
+        }
+
+        .table-note {
+          font-size: 1.2rem;
+          color: #666;
+          font-style: italic;
+        }
+
+
+          @media screen and (min-width: 750px) {
+          .section-{{ section.id }}-padding {
+            padding-top: {{ section.settings.padding_top }}px;
+            padding-bottom: {{ section.settings.padding_bottom }}px;
+          }
+        }
+{% endstyle %}
+
+{% if product.tags contains 'clinical-grade' %}
+  <section
+    class="section-{{ section.id }}-padding lazy-section clinical-grade-section"
+    data-section="scientific-breakdown"
+  >
+    <div class=" page-width">
+      <div class="scientific-table-section">
+        <h2 class="table-title">{{ section.settings.title }}</h2>
+        <div class="table-responsive">
+          <table class="scientific-data-table scientific-data-table--{{ section.settings.table_style }}">
+            <thead>
+              <tr>
+                {% for block in section.blocks %}
+                  {% if block.type == 'column' %}
+                    <th style="background-color: {{ section.settings.header_bg }}; color: {{ section.settings.header_text }};">
+                      {{ block.settings.column_title }}
+                    </th>
+                  {% endif %}
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for block in section.blocks %}
+                {% if block.type == 'row' %}
+                  <tr>
+                    <td>
+                      <strong>{{ block.settings.row_title }}</strong>
+                    </td>
+                    <td>{{ block.settings.value_1 }}</td>
+                    <td>{{ block.settings.value_2 }}</td>
+                    <td>{{ block.settings.value_3 }}</td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% if section.settings.footer_note %}
+          <p class="table-note">{{ section.settings.footer_note }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% schema %}
+{
+  "name": "Scientific Breakdown",
+  "settings": [
+     {
+      "type": "text",
+      "id": "title",
+      "label": "Table Title",
+      "default": "Table 1"
+    },
+     {
+      "type": "text",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "*All rock types had an initial temperature of 10°C."
+    },
+    {
+      "type": "header",
+      "content": "Style Settings"
+    },
+    {
+      "type": "color",
+      "id": "header_bg",
+      "label": "Header Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "header_text",
+      "label": "Header Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "select",
+      "id": "table_style",
+      "label": "Table Style",
+      "options": [
+        {
+          "value": "minimal",
+          "label": "Minimal"
+        },
+        {
+          "value": "bordered",
+          "label": "Bordered"
+        },
+        {
+          "value": "striped",
+          "label": "Striped Rows"
+        }
+      ],
+      "default": "bordered"
+    },
+     {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+     {
+      "type": "row",
+      "name": "Table Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "row_title",
+          "label": "Row Title"
+        },
+        {
+          "type": "text",
+          "id": "value_1",
+          "label": "Value 1"
+        },
+        {
+          "type": "text",
+          "id": "value_2",
+          "label": "Value 2"
+        },
+        {
+          "type": "text",
+          "id": "value_3",
+          "label": "Value 3"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

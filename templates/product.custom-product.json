@@ -1,0 +1,152 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "custom-main-product",
+      "settings": {
+        "image_badge": "shopify://shop_images/Frame_48098100.png",
+        "video-caption": "See it in action",
+        "video-title": "Watch our  product demonstration",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "usp-section": {
+      "type": "usp-section",
+      "blocks": {
+        "usp_block_items_zg7PAd": {
+          "type": "Usp-block-items",
+          "settings": {
+            "svg_embed": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-leaf w-6 h-6 text-rose-600\"><path d=\"M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z\"></path><path d=\"M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12\"></path></svg>",
+            "item_title": "100% Natural Ingredients",
+            "item_paragraph": "<p>Carefully sourced botanical extracts with no harmful chemicals or synthetic additives<br/><br/></p>"
+          }
+        },
+        "usp_block_items_FgPNjY": {
+          "type": "Usp-block-items",
+          "settings": {
+            "svg_embed": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-shield w-6 h-6 text-rose-600\"><path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\"></path></svg>",
+            "item_title": "Dermatologist Tested",
+            "item_paragraph": "<p>Clinically proven safe and effective for all skin types, including sensitive skin<br/><br/></p>"
+          }
+        },
+        "usp_block_items_P7FPC4": {
+          "type": "Usp-block-items",
+          "settings": {
+            "svg_embed": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-clock w-6 h-6 text-rose-600\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle><polyline points=\"12 6 12 12 16 14\"></polyline></svg>",
+            "item_title": "Visible Results in 7 Days",
+            "item_paragraph": "<p>See noticeable improvements in skin texture, hydration, and radiance within one week<br/><br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "usp_block_items_zg7PAd",
+        "usp_block_items_FgPNjY",
+        "usp_block_items_P7FPC4"
+      ],
+      "settings": {
+        "body_color": "#fcf2ef",
+        "heading": "Why Choose Our Skincare?",
+        "paragraph": "<p>Discover what makes our skincare products the perfect choice for your daily routine<br/><br/></p>",
+        "padding_top": 75,
+        "padding_bottom": 70
+      }
+    },
+    "scientific-breakdown": {
+      "type": "scientific-breakdown",
+      "blocks": {
+        "row_T8VxaF": {
+          "type": "row",
+          "settings": {
+            "row_title": "Step",
+            "value_1": "Key Ingredients",
+            "value_2": "Scientific Benefit",
+            "value_3": ""
+          }
+        },
+        "row_DpBcFf": {
+          "type": "row",
+          "settings": {
+            "row_title": "Cleanse",
+            "value_1": "Gentle surfactants (e.g. coco-glucoside)",
+            "value_2": "Removes dirt and oil without stripping skin’s natural lipids.",
+            "value_3": ""
+          }
+        },
+        "row_7Bj6KA": {
+          "type": "row",
+          "settings": {
+            "row_title": "Hydrate",
+            "value_1": "Hyaluronic acid, glycerin",
+            "value_2": "Humectants that attract and hold moisture in the stratum corneum.",
+            "value_3": ""
+          }
+        },
+        "row_ayLWdz": {
+          "type": "row",
+          "settings": {
+            "row_title": "Treat",
+            "value_1": "Vitamin C, niacinamide, peptides",
+            "value_2": "Antioxidants (Vitamin C) fight free radicals; niacinamide improves barrier and brightens; peptides stimulate collagen.",
+            "value_3": ""
+          }
+        },
+        "row_XCGirc": {
+          "type": "row",
+          "settings": {
+            "row_title": "Moisturize",
+            "value_1": "Ceramides, squalane, fatty acids",
+            "value_2": "Reinforce skin barrier by replenishing lipids; prevent transepidermal water loss.",
+            "value_3": ""
+          }
+        },
+        "row_3rBYLQ": {
+          "type": "row",
+          "settings": {
+            "row_title": "Protect (AM)",
+            "value_1": "Broad-spectrum sunscreen (zinc oxide, titanium dioxide)",
+            "value_2": "Physical or chemical UV filters block harmful UV radiation that accelerates aging and DNA damage.",
+            "value_3": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_T8VxaF",
+        "row_DpBcFf",
+        "row_7Bj6KA",
+        "row_ayLWdz",
+        "row_XCGirc",
+        "row_3rBYLQ"
+      ],
+      "settings": {
+        "title": "Scientific Breakdown",
+        "footnote": "*All Skin Care types had an initial temperature of 10°C.",
+        "header_bg": "#f5f5f5",
+        "header_text": "#333333",
+        "table_style": "minimal",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "custom-recommendations": {
+      "type": "custom-recommendations",
+      "settings": {
+      
+      }
+    }
+  },
+  "order": [
+    "main",
+    "usp-section",
+    "scientific-breakdown",
+    "custom-recommendations"
+  ]
+}
